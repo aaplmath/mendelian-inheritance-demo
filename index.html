@@ -1,0 +1,277 @@
+<!-- Cite flowers from Wikimedia -->
+<!-- CSS library is materialize CSS -->
+<!-- Also using Chart.js and Chart.js datalabels plugin -->
+<!-- And, of course, using jQuery -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Allele Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+</head>
+<body>
+  <header></header>
+  <main>
+    <div class="section">
+      <div class="row">
+        <!-- Main sim content -->
+        <div class="col s8 simview">
+          <div class="row parent-row">
+            <div class="parent col s6 offset-s3">
+            <!-- Parent 1 -->
+            <div class="col s6">
+              <div class="card parent-card darken-1">
+                <div class="card-image">
+                  <img id="parent-1-img">
+                </div>
+                <div class="card-content black-text">
+                  <div class="row">
+                    <div class="col s6 inline">
+                      <select class="parent-select" id="p1p1">
+                        <option value="" disabled selected>?</option>
+                        <option class="allele-select-dom" value=""></option>
+                        <option class="allele-select-rec" value=""></option>
+                      </select>
+                    </div>
+                    <div class="col s6 inline">
+                      <select class="parent-select" id="p1p2">
+                        <option value="" disabled selected>?</option>
+                        <option class="allele-select-dom" value=""></option>
+                        <option class="allele-select-rec" value=""></option>
+                      </select>
+                    </div>
+                  </div>
+                  <p>Parent 1</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Parent 2 -->
+            <div class="col s6">
+              <div class="card parent-card darken-1">
+                <div class="card-image">
+                  <img id="parent-2-img">
+                </div>
+                <div class="card-content black-text">
+                  <div class="row parent-selects-row" id="parent-2-selects">
+                    <div class="col s6 inline">
+                      <select class="parent-select" id="p2p1">
+                        <option value="" disabled selected>?</option>
+                        <option class="allele-select-dom" value=""></option>
+                        <option class="allele-select-rec" value=""></option>
+                      </select>
+                    </div>
+                    <div class="col s6 inline">
+                      <select class="parent-select" id="p2p2">
+                        <option value="" disabled selected>?</option>
+                        <option class="allele-select-dom" value=""></option>
+                        <option class="allele-select-rec" value=""></option>
+                      </select>
+                    </div>
+                  </div>
+                  <p>Parent 2</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+          <div class="col s2 card blue-grey darken-1 white-text" id="pop-number-card">
+            <div class="card-content">
+              <p># of Offspring: <span id="offspring-count">0</span></p>
+            </div>
+          </div>
+          <!-- Child offspring -->
+          <div class="child-container row">
+          </div>
+          
+        </div>
+        
+        <!-- Info cards -->
+        <div class="col s4">
+          <div class="card allele-card blue-grey darken-1">
+            <div class="card-content white-text">
+              <table id="cross-table">
+                <tr>
+                  <th>Allele</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+                <tr>
+                  <th>&nbsp;</th>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>&nbsp;</th>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          
+          <!-- Genotype prevalence and graph -->
+          <div class="row" style="margin-bottom: 0px">
+            <div class="col s6">
+              <div class="card mini blue-grey darken-1">
+                <div class="card-content white-text">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Genotype</th>
+                        <th>% Pop</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td id="label-homo-dom"></td>
+                        <td class="genotype-datum" id="genotype-homo-dom"></td>
+                      </tr>
+                      <tr>
+                        <td id="label-hetero"></td>
+                        <td class="genotype-datum" id="genotype-hetero"></td>
+                      </tr>
+                      <tr>
+                        <td id="label-homo-rec"></td>
+                        <td class="genotype-datum" id="genotype-homo-rec"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="col s6">
+              <div class="card mini blue-grey darken-1">
+                <div class="card-content white-text chart-container">
+                  <canvas id="genotype-chart" width="400" height="400"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Phenotype prevalence and graph -->
+          <div class="row" style="margin-bottom: 0px">
+            <div class="col s6">
+              <div class="card mini blue-grey darken-1">
+                <div class="card-content white-text">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Phenotype</th>
+                        <th>% Pop</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Violet</td>
+                        <td class="phenotype-datum" id="phenotype-violet"></td>
+                      </tr>
+                      <tr>
+                        <td>White</td>
+                        <td class="phenotype-datum" id="phenotype-white"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="col s6">
+                <div class="card mini blue-grey darken-1">
+                  <div class="card-content white-text chart-container">
+                    <canvas id="phenotype-chart" width="400" height="400"></canvas>
+                  </div>
+                </div>
+            </div>
+          </div>
+          
+          
+        </div>
+      </div>
+    </main>
+    
+    <footer class="page-footer black">
+      <div class="container">
+        <div class="num-buttons-row row">
+          <div class="col s2">
+            <a class="waves-effect waves-light btn green">1</a>
+          </div>
+          <div class="col s2">
+            <a class="waves-effect waves-light btn blue">3</a>
+          </div>
+          <div class="col s2">
+            <a class="waves-effect waves-light btn blue">6</a>
+          </div>
+          <div class="col s2">
+            <a class="waves-effect waves-light btn blue">12</a>
+          </div>
+          <div class="col s2">
+            <a class="waves-effect waves-light btn blue">30</a>
+          </div>
+          <div class="col s2">
+            <a class="waves-effect waves-light btn blue">100</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+    <div class="fixed-action-btn">
+      <a class="btn-floating btn-large green waves-effect waves-light" id="play-button">
+        <i class="large material-icons">play_arrow</i>
+      </a>
+      <ul>
+        <li><a class="btn-floating red waves-effect waves-light" id="reset-button"><i class="material-icons">cancel</i></a></li>
+        <li><a class="btn-floating blue waves-effect waves-light" id="ff-button"><i class="large material-icons">fast_forward</i></a></li>
+      </ul>
+    </div>
+
+    <!-- Citations button -->
+    <a class="btn-floating btn-large waves-effect waves-light grey modal-trigger" id="citation-button" href="#citations-modal"><i class="material-icons">info</i></a>
+
+    <!-- Modals -->
+    <div id="incomplete-alleles-modal" class="modal">
+      <div class="modal-content">
+        <h4>Alleles Missing</h4>
+        <p>You need to fill in all of the parents' alleles before you can generate offspring.</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-black btn-flat">OK</a>
+      </div>
+    </div>
+    <div id="confirm-reset-modal" class="modal">
+      <div class="modal-content">
+        <h4>Reset Simulation?</h4>
+        <p>This will clear all parent alleles, offspring, and statistics, resetting the simulation to its original state.</p>
+      </div>
+      <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-light btn blue">Cancel</a>
+        <a href="#!" class="waves-effect waves-light btn red" id="confirm-reset">Reset</a>
+      </div>
+    </div>
+
+    <div class="modal" id="citations-modal">
+      <div class="modal-content">
+        <h4>Sources and Third-Party Libraries</h4>
+        <p>Pea plant graphic: Wikimedia, 2015 (https://commons.wikimedia.org/wiki/File:Mendels_peas.png)</p>
+        <p>Materialize CSS (https://materializecss.com, &copy; 2019) is made available under the MIT license</p>
+        <p>Chart.js (https://www.chartjs.org/, &copy; 2019) is made available under the MIT license</p>
+        <p>chartjs-plugin-datalabels (https://chartjs-plugin-datalabels.netlify.com/, &copy; 2018) is made available under the MIT license</p>
+        <p>jQuery (https://jquery.com/, &copy; 2019) is made available under the MIT license</p>
+      </div>
+      <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-grey btn-flat">Close</a>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.5.0"></script>
+    <script src="main.js"></script>
+  </body>
+  </html>
+  

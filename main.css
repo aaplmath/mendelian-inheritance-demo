@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+body *:not(i) {
+  font-family: 'Ubuntu' !important;
+}
+
+.activated-allele {
+  background-color: #ffeb3b !important;
+  border-radius: 1em !important;
+  box-shadow: 8px 8px 5px #ccc !important;
+  border: none !important;
+  padding: 0.5em !important;
+  position: absolute !important;
+}
+
+.activated-allele ~ .caret {
+  display: none;
+}
+
+.dropdown-content a {
+  color: #2196F3 !important;
+}
+img {
+  height: 5em;
+  margin: 0 auto;
+  visibility: hidden;
+}
+img[src] {
+ visibility: visible;
+}
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  overflow: hidden;
+}
+.chart-container {
+  overflow: hidden;
+}
+
+main {
+  flex: 1 0 auto;
+}
+.simview .card-image {
+  padding-top: 1em;
+}
+.card.mini {
+  height: 12.5em;
+}
+.allele-card {
+  height: 10em;
+}
+.parent-card {
+  height: 15em;
+}
+.parent-row {
+  height: calc(15em + 1.5rem)
+}
+.child-container {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: calc(100vh - 15em - 1.5rem - 7.5em);
+}
+.child-container .col {
+  display: table-cell !important;
+}
+.child-container .card-content {
+  text-align: center;
+  padding: 0;
+}
+.child-container .card-image {
+  padding: 0;
+}
+#pop-number-card {
+  position: absolute !important;
+  top: 12.5em !important;
+  right: 30em !important;
+  width: 12em !important;
+  padding: 0 !important;
+}
+#pop-number-card .card-content {
+  padding: 1em !important;
+}
+td, th {
+  padding: 5px 5px !important;
+}
+footer {
+  height: 4em;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+footer .num-buttons-row .btn {
+  bottom: 0.5em;
+}
+.btn.green[disabled] {
+  background-color: rgba(76,175,80,0.75) !important;
+}
+#citation-button {
+  position: absolute;
+  top: 1em;
+  left: 1em;
+}
